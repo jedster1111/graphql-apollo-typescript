@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import uuid = require("uuid/v4");
+import uuid = require("uuid/v1");
 
 @ObjectType()
 export default class User {
