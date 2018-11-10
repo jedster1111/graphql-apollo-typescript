@@ -1,5 +1,5 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import databasePolls, { pollOps, StoredPoll } from "../database/polls";
+import databasePolls, { pollDb, StoredPoll } from "../database/polls";
 import users from "../database/users";
 import Poll from "./Poll";
 import PollInput from "./PollInput";
@@ -17,11 +17,21 @@ export default class PollResolver {
     return pollsWithUsers;
   }
 
+  @Query(returns => Poll, { description: "Get a poll by id" })
+  Poll(@Arg("id") id: string): Poll {
+    return getPollWithUser(pollDb.findPoll(id));
+  }
+
   @Mutation(returns => Poll)
   addPoll(@Arg("data") data: PollInput): Poll {
-    const newPoll = pollOps.addPoll(data);
+    const newPoll = pollDb.addPoll(data);
     return getPollWithUser(newPoll);
   }
+
+  // @FieldResolver()
+  // creator(@Root() poll: Poll, @Arg("creator")){
+
+  // };
 }
 
 function getPollWithUser({ creatorId, ...rest }: StoredPoll): Poll {

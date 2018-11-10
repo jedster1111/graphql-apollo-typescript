@@ -12,7 +12,7 @@ export interface StoredPoll {
   title: string;
 }
 
-export const pollOps = {
+export const pollDb = {
   addPoll(data: PollInput): StoredPoll {
     const id = uuid();
     const newPoll = {
@@ -23,6 +23,10 @@ export const pollOps = {
     };
     polls[id] = newPoll;
     return newPoll;
+  },
+  findPoll(id: string): StoredPoll {
+    console.log(`Getting poll with id ${id}`);
+    return polls[id];
   }
 };
 
