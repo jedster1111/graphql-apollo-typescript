@@ -3,7 +3,7 @@ import "reflect-metadata";
 import { ApolloServer } from "apollo-server";
 import * as path from "path";
 import { buildSchema } from "type-graphql";
-import RandomDieResolver from "./DieResolver";
+import RandomDieResolver from "./Dice/DieResolver";
 
 async function bootstrap() {
   const schema = await buildSchema({
