@@ -4,10 +4,11 @@ import { ApolloServer } from "apollo-server";
 import * as path from "path";
 import { buildSchema } from "type-graphql";
 import RandomDieResolver from "./Dice/DieResolver";
+import PollResolver from "./Polls/PollResolver";
 
 async function bootstrap() {
   const schema = await buildSchema({
-    resolvers: [RandomDieResolver],
+    resolvers: [RandomDieResolver, PollResolver],
     emitSchemaFile: path.resolve(__dirname, "schema.gql")
   });
 

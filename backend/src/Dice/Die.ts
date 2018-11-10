@@ -5,8 +5,8 @@ export default class RandomDie {
   @Field(type => Int)
   sides: number;
 
-  constructor(sides: number) {
-    this.sides = sides;
+  constructor(sides?: number) {
+    this.sides = sides || 6;
   }
 
   @Field(type => [Int])
