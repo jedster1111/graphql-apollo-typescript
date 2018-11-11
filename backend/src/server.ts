@@ -7,6 +7,7 @@ import { useContainer as useContainerTypeGraphQL } from "type-graphql";
 import { createConnection, useContainer as useContainerTypeOrm } from "typeorm";
 
 import { ApolloServer } from "apollo-server";
+import * as path from "path";
 import { buildSchema } from "type-graphql";
 import { Container } from "typedi";
 import Cat from "./entities/Cat";
@@ -36,7 +37,8 @@ async function bootstrap() {
     });
 
     const schema = await buildSchema({
-      resolvers: [CatResolver]
+      resolvers: [CatResolver],
+      emitSchemaFile: path.resolve(__dirname, "schema.gql")
     });
 
     const server = new ApolloServer({

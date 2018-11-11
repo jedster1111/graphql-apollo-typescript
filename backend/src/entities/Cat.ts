@@ -9,6 +9,6 @@ export default class Cat {
   readonly id: number;
 
   @Field()
-  @Column("text")
+  @Column()
   name: string;
 }
