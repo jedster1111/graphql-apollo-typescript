@@ -7,10 +7,10 @@ See [this type-graphql with typeorm example](https://github.com/19majkel94/type-
 ## Setup
 
 Need to have a postgresql db running on localhost.  
-Copy the `.template.env` file and enter whatever password you used to set up your PostgreSQL. Your file should look like below:
+Copy the `.template.env` file, renaming it to `.env`, and enter whatever password you used to set up your PostgreSQL. Your file should look like below:
 
 ```env
-DB_PASS = EnterYourDBPasswordHere
+DB_PASS = EnterYourDbPasswordHere
 ```
 
 Then run:
