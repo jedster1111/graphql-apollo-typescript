@@ -11,7 +11,9 @@ import * as path from "path";
 import { buildSchema } from "type-graphql";
 import { Container } from "typedi";
 import Cat from "./entities/Cat";
+import User from "./entities/User";
 import CatResolver from "./resolvers/cat-resolver";
+import UserResolver from "./resolvers/user-resolver";
 
 const { DB_PASS } =
   process.env || "You need to enter your password in a .env file";
@@ -26,9 +28,9 @@ async function bootstrap() {
       database: "postgres",
       username: "postgres",
       password: DB_PASS,
-      port: 5432,
+      port: 5433,
       host: "localhost",
-      entities: [Cat],
+      entities: [Cat, User],
       synchronize: true,
       logger: "advanced-console",
       logging: "all",
@@ -37,7 +39,7 @@ async function bootstrap() {
     });
 
     const schema = await buildSchema({
-      resolvers: [CatResolver],
+      resolvers: [CatResolver, UserResolver],
       emitSchemaFile: path.resolve(__dirname, "schema.gql")
     });
 
