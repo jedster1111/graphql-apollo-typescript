@@ -39,8 +39,8 @@ export default class CatResolver {
     return await this.catRepository.save(cat);
   }
 
-  @Mutation(type => Cat, { nullable: true })
-  async removeCat(@Arg("catId", type => ID) catId: number): Promise<void> {
+  @Mutation(type => Boolean)
+  async removeCat(@Arg("catId", type => ID) catId: number): Promise<boolean> {
     const catToRemove = await this.catRepository.findOne(catId);
 
     if (catToRemove === undefined) {
@@ -48,6 +48,7 @@ export default class CatResolver {
     }
 
     await this.catRepository.remove(catToRemove);
+    return true;
   }
 
   @FieldResolver()
