@@ -15,8 +15,10 @@ import User from "./entities/User";
 import CatResolver from "./resolvers/cat-resolver";
 import UserResolver from "./resolvers/user-resolver";
 
-const { DB_PASS } =
-  process.env || "You need to enter your password in a .env file";
+const { DB_PASS } = process.env;
+if (DB_PASS === undefined) {
+  throw new Error("You need to enter your password in a .env file");
+}
 
 useContainerTypeGraphQL(Container);
 useContainerTypeOrm(Container);
