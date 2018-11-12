@@ -1,13 +1,13 @@
 import { Field, ID, InputType } from "type-graphql";
-import Cat from "../../entities/Cat";
+import Cat, { Size } from "../../entities/Cat";
 
 @InputType()
 export default class CatInput implements Partial<Cat> {
   @Field()
   name: string;
 
-  @Field()
-  size: string;
+  @Field(type => Size)
+  size: Size;
 
   @Field()
   personality: string;

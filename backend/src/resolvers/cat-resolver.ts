@@ -32,11 +32,22 @@ export default class CatResolver {
   }
 
   @Mutation(returns => Cat)
-  async addCat(@Arg("cat") catInput: CatInput): Promise<Cat> {
+  async addCat(@Arg("catInput") catInput: CatInput): Promise<Cat> {
     const cat = this.catRepository.create({
       ...catInput
     });
     return await this.catRepository.save(cat);
+  }
+
+  @Mutation(type => Cat, { nullable: true })
+  async removeCat(@Arg("catId", type => ID) catId: number): Promise<void> {
+    const catToRemove = await this.catRepository.findOne(catId);
+
+    if (catToRemove === undefined) {
+      throw new Error("Cat with that ID doesn't exist!");
+    }
+
+    await this.catRepository.remove(catToRemove);
   }
 
   @FieldResolver()
